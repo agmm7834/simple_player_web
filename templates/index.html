@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Video Player</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<div class="app">
+    <aside class="sidebar">
+        <h2>📂 Playlist</h2>
+        <ul>
+            {% for v in videos %}
+            <li onclick="playVideo('{{ v }}')">{{ v }}</li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <main class="content">
+        <h1>🎬 Flask Video Player</h1>
+        <video id="video" controls>
+            <source src="/video/{{ videos[0] }}" type="video/mp4">
+        </video>
+    </main>
+</div>
+
+<script>
+    const video = document.getElementById("video");
+
+    function playVideo(name) {
+        video.src = "/video/" + name;
+        video.play();
+    }
+</script>
+
+</body>
+</html>
+
